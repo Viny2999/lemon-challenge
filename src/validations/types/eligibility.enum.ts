@@ -1,4 +1,4 @@
-export const tiposDeConexao = ['monofasico', 'bifasico', 'trifasico']
+export const tiposDeConexao = ['monofasico', 'bifasico', 'trifasico'];
 
 export const classesDeConsumo = [
   'residencial',
@@ -6,6 +6,6 @@ export const classesDeConsumo = [
   'comercial',
   'rural',
   'poderPublico',
-]
+];
 
-export const modalidadesTarifarias = ['azul', 'branca', 'verde', 'convencional']
+export const modalidadesTarifarias = ['azul', 'branca', 'verde', 'convencional'];

@@ -1,15 +1,15 @@
-export interface EligibilityRequestBody {
-  numeroDoDocumento: string;
-  tipoDeConexao: string;
-  classeDeConsumo: string;
-  modalidadeTarifaria: string;
-  historicoDeConsumo: number[];
-};
-
 export enum TiposDeConexaoEnum {
   Monofasico = 'monofasico',
   Bifasico = 'bifasico',
   Trifasico = 'trifasico',
+}
+
+export interface EligibilityRequestBody {
+  numeroDoDocumento: string;
+  tipoDeConexao: TiposDeConexaoEnum;
+  classeDeConsumo: string;
+  modalidadeTarifaria: string;
+  historicoDeConsumo: number[];
 }
 
 export enum RazoesEnum {
@@ -22,7 +22,7 @@ export const classesDeConsumoPermitidas = [
   'residencial',
   'industrial',
   'comercial',
-]
+];
 
 export const modalidadesTarifariasPermitidas = ['branca', 'convencional'];
 

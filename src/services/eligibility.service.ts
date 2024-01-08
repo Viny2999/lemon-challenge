@@ -43,9 +43,9 @@ export class EligibilityService {
     });
   };
 
-  private getTotalHistoricoDeConsumo = (historicoDeConsumo): number => historicoDeConsumo.reduce((acc, consumo) => acc + consumo, 0);
+  public getTotalHistoricoDeConsumo = (historicoDeConsumo: number[]): number => historicoDeConsumo.reduce((acc, consumo) => acc + consumo, 0);
 
-  private calculateMinimumConsumption = (historicoDeConsumo, tipoDeConexao) => {
+  public calculateMinimumConsumption = (historicoDeConsumo: number[], tipoDeConexao: TiposDeConexaoEnum) => {
     const mediaConsumo = this.getTotalHistoricoDeConsumo(historicoDeConsumo) / historicoDeConsumo.length;
   
     switch (tipoDeConexao) {
@@ -60,11 +60,11 @@ export class EligibilityService {
     }
   };
 
-  private calculateEconomyAnnualCO2 = (historicoDeConsumo) => {
+  public calculateEconomyAnnualCO2 = (historicoDeConsumo: number[]) => {
     const emissaoMediaCO2PorKWh = 84;
 
     const totalConsumo = this.getTotalHistoricoDeConsumo(historicoDeConsumo);
     
     return parseFloat((totalConsumo * (emissaoMediaCO2PorKWh / 1000)).toFixed(2));
-  }
-};
+  };
+}

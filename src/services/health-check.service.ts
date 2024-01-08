@@ -21,5 +21,5 @@ export class HealthCheckService {
     const secondsToMilliseconds = seconds => seconds * 1000;
     const momentFormat = seconds => moment.utc(secondsToMilliseconds(seconds)).format('HH:mm');
     return momentFormat(process.uptime());
-  }
+  };
 }
