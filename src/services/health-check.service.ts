@@ -9,13 +9,17 @@ export class HealthCheckService {
   public checkHealth = (req: Request, res: Response): Response => {
     logger.debug('HealthCheckService :: checkHealth :: Status of application retrivied');
 
-    const secondsToMilliseconds = seconds => seconds * 1000;
-    const momentFormat = seconds => moment.utc(secondsToMilliseconds(seconds)).format('HH:mm');
-    const uptimeHumanDate = momentFormat(process.uptime());
+    const uptimeHumanDate = this.getHumanDate();
 
     return res.send({
-      apiName: 'ts-node-boilerplaite',
+      apiName: 'lemon-challenge',
       uptime: uptimeHumanDate
     });
   };
+
+  private getHumanDate = (): string => {
+    const secondsToMilliseconds = seconds => seconds * 1000;
+    const momentFormat = seconds => moment.utc(secondsToMilliseconds(seconds)).format('HH:mm');
+    return momentFormat(process.uptime());
+  }
 }
