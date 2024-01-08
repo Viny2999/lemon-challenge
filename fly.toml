@@ -1,0 +1,22 @@
+app = "lemon-challenge"
+primary_region = "gru"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = "80"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
+
+[env]
+  NODE_ENV = "development"
+  PORT = "3000"
+  LOG_LEVEL = "debug"
