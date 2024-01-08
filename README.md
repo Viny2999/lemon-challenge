@@ -9,7 +9,7 @@ There are two ways to run the application:
 * Using NPM:
   ```
   npm install
-  npm run build & npm start
+  npm run build && npm start
   ``` 
 
 ## Tests
