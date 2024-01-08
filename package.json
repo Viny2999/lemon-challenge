@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc --build",
-    "start": "node dist/app.js",
+    "start": "npm run build && node dist/app.js",
     "dev": "NODE_ENV=dev nodemon src/app.ts",
     "test": "LOG_LEVEL=test jest ./src/tests -i --colors --verbose --forceExit",
     "lint": "eslint . --fix --ext .ts && echo '✔  Your .ts files look good.'"
