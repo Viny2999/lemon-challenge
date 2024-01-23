@@ -3,6 +3,7 @@ import { EligibilityRequestBody,
   TiposDeConexaoEnum,
   RazoesEnum,
   classesDeConsumoPermitidas,
+  subClassesDeConsumoPermitidos,
   modalidadesTarifariasPermitidas,
   MIN_CONSUMPTION_MONOFASICO,
   MIN_CONSUMPTION_BIFASICO,
@@ -18,6 +19,11 @@ export class EligibilityService {
 
     if (!classesDeConsumoPermitidas.includes(eligibilityRequestBody.classeDeConsumo)) {
       razoesDeInelegibilidade.push(RazoesEnum.ClasseConsumo);
+    }
+
+    const subClassesDeConsumoPermitidas = subClassesDeConsumoPermitidos[eligibilityRequestBody.classeDeConsumo] || [];
+    if (!subClassesDeConsumoPermitidas.includes(eligibilityRequestBody.subclassesDeConsumo)) {
+      razoesDeInelegibilidade.push(RazoesEnum.SubClasseConsumo);
     }
 
     if (!modalidadesTarifariasPermitidas.includes(eligibilityRequestBody.modalidadeTarifaria)) {
@@ -63,7 +69,9 @@ export class EligibilityService {
   public calculateEconomyAnnualCO2 = (historicoDeConsumo: number[]) => {
     const emissaoMediaCO2PorKWh = 84;
 
-    const totalConsumo = this.getTotalHistoricoDeConsumo(historicoDeConsumo);
+    const mediaConsumo = this.getTotalHistoricoDeConsumo(historicoDeConsumo) / historicoDeConsumo.length;
+
+    const totalConsumo = mediaConsumo * 12;
     
     return parseFloat((totalConsumo * (emissaoMediaCO2PorKWh / 1000)).toFixed(2));
   };

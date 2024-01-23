@@ -20,9 +20,10 @@ describe('EligibilityController', () => {
   
   it('should respond with not eligible and reasons for invalid input', async () => {
     const invalidRequest = {
-      numeroDoDocumento: '14041737706',
+      numeroDoDocumento: '03932527011',
       tipoDeConexao: 'bifasico',
       classeDeConsumo: 'rural',
+      subclassesDeConsumo: 'comercial',
       modalidadeTarifaria: 'verde',
       historicoDeConsumo: [
         3878,
@@ -51,9 +52,10 @@ describe('EligibilityController', () => {
 
   it('should respond with eligible and CO2 savings for valid input', async () => {
     const validRequest = {
-      numeroDoDocumento: '14041737706',
+      numeroDoDocumento: '03932527011',
       tipoDeConexao: TiposDeConexaoEnum.Bifasico,
       classeDeConsumo: 'comercial',
+      subclassesDeConsumo: 'comercial',
       modalidadeTarifaria: 'convencional',
       historicoDeConsumo: [
         3878,

@@ -1,18 +1,22 @@
 import Joi, { ObjectSchema } from 'joi';
-import { classesDeConsumo, modalidadesTarifarias, tiposDeConexao } from './types/eligibility.enum';
+import { cpf, cnpj } from 'cpf-cnpj-validator'; 
+import { classesDeConsumo, subClassesDeConsumo, modalidadesTarifarias, tiposDeConexao } from './types/eligibility.enum';
 
 interface ValidationSchema {
   body: ObjectSchema;
 }
 
 const validateCPForCNPJ = (value: string) => {
-  const cpfRegex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
-  const cnpjRegex = /d{2}\.?\d{3}\.?\d{3}\/?\d{4}\-?\d{2}/;
+  const cpfRegex = /^\d{11}$/;
+  const cnpjRegex = /^\d{14}$/;
   
   if (!(cpfRegex.test(value) || cnpjRegex.test(value))) {
     throw new Error('CPF ou CNPJ Invalidos');
   }
-
+  
+  if (!(cpf.isValid(value) || cnpj.isValid(value))) {
+    throw new Error('CPF ou CNPJ Invalidos');
+  }
   return value;
 };
 
@@ -21,6 +25,7 @@ export const eligibilityBody: ValidationSchema = {
     numeroDoDocumento: Joi.string().required().custom(validateCPForCNPJ),
     tipoDeConexao: Joi.string().valid(...tiposDeConexao).required(),
     classeDeConsumo: Joi.string().valid(...classesDeConsumo).required(),
+    subclassesDeConsumo: Joi.string().valid(...subClassesDeConsumo).required(),
     modalidadeTarifaria: Joi.string().valid(...modalidadesTarifarias).required(),
     historicoDeConsumo: Joi.array()
       .min(3)

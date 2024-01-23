@@ -8,14 +8,16 @@ export interface EligibilityRequestBody {
   numeroDoDocumento: string;
   tipoDeConexao: TiposDeConexaoEnum;
   classeDeConsumo: string;
+  subclassesDeConsumo: string;
   modalidadeTarifaria: string;
   historicoDeConsumo: number[];
 }
 
 export enum RazoesEnum {
   ClasseConsumo = 'Classe de consumo não aceita',
+  SubClasseConsumo = 'Subclasse de consumo não aceita',
   ModalidadeTarifaria = 'Modalidade tarifária não aceita',
-  ConsumoMinimo = 'Consumo minimo insuficiente',
+  ConsumoMinimo = 'Consumo muito baixo para tipo de conexão',
 }
 
 export const classesDeConsumoPermitidas = [
@@ -23,6 +25,20 @@ export const classesDeConsumoPermitidas = [
   'industrial',
   'comercial',
 ];
+
+export const subClassesDeConsumoPermitidos = {
+  comercial: [
+    'administração condominal',
+    'comercial',
+    'serviços de telecomunicação',
+  ],
+  industrial: [
+    'industrial',
+  ],
+  residencial: [
+    'residencial',
+  ]
+};
 
 export const modalidadesTarifariasPermitidas = ['branca', 'convencional'];
 

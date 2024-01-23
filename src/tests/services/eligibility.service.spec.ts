@@ -13,6 +13,7 @@ describe('EligibilityService', () => {
       const req = {
         body: {
           classeDeConsumo: 'InvalidClass',
+          subclassesDeConsumo: 'InvalidClass',
           modalidadeTarifaria: 'ValidTariff',
           historicoDeConsumo: [100, 150, 200],
           tipoDeConexao: TiposDeConexaoEnum.Monofasico,
@@ -29,6 +30,7 @@ describe('EligibilityService', () => {
         elegivel: false,
         razoesDeInelegibilidade: [
           RazoesEnum.ClasseConsumo,
+          RazoesEnum.SubClasseConsumo,
           RazoesEnum.ModalidadeTarifaria,
           RazoesEnum.ConsumoMinimo
         ],
@@ -41,6 +43,7 @@ describe('EligibilityService', () => {
           numeroDoDocumento: '14041737706',
           tipoDeConexao: TiposDeConexaoEnum.Bifasico,
           classeDeConsumo: 'comercial',
+          subclassesDeConsumo: 'comercial',
           modalidadeTarifaria: 'convencional',
           historicoDeConsumo: [
             3878,
@@ -86,20 +89,12 @@ describe('EligibilityService', () => {
   describe('calculateEconomyAnnualCO2', () => {
     it('should return the correct annual CO2 savings based on consumption history', () => {
       const historicoDeConsumo = [
-        3878,
-        9760,
-        5976,
-        2797,
-        2481,
-        5731,
-        7538,
-        4392,
-        7859,
-        4160,
-        6941,
-        4597,
+        1000,
+        1000,
+        1000,
+        1000,
       ];
-      const expectedCO2Savings = 5553.24;
+      const expectedCO2Savings = 1008;
       const result = eligibilityService.calculateEconomyAnnualCO2(historicoDeConsumo);
 
       expect(result).toBe(expectedCO2Savings);
